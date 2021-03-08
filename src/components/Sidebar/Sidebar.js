@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as s from './Sidebar.styles';
+import { AnimatePresence, motion } from 'framer-motion'
 
 const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', shortHeader: '' }, menuItems = [], fonts = { header: '', menu: '' } }) => {
 
@@ -77,6 +78,8 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                     selected={isItemSelected}
                     onClick={() => handleMenuItemClick(item.name, index)}
                     isSidebarOpen={isSidebarOpen}
+                    isOpen={isOpen}
+
                 >
                     <s.Icon src={item.icon}
                         isSidebarOpen={isSidebarOpen}
@@ -91,10 +94,19 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                         />
                     )}
                 </s.MenuItem>
-                {hasSubmenus && isOpen && (
-                    <s.SubMenuItemContainer
-                        isSidebarOpen={isSidebarOpen}>{subMenusJSX}</s.SubMenuItemContainer>
-                )}
+                <AnimatePresence>
+                    {hasSubmenus && isOpen && (
+                        <motion.nav
+                            initial={{ opacity: 0, y: -15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.35 }}
+                            exit={{ opacity: 0, x: -30 }}
+                        >
+                            <s.SubMenuItemContainer
+                                isSidebarOpen={isSidebarOpen}>{subMenusJSX}</s.SubMenuItemContainer>
+                        </motion.nav>
+                    )}
+                </AnimatePresence>
 
             </s.ItemContainer>
         )

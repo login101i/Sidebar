@@ -47,7 +47,7 @@ transition:0.5s all ease-in-out;
 
       &:hover {
     color: rgba(255, 255, 255);
-    transition: .1s ease-in all;
+    transition: 0.1s ease-in all;
 
   }
 
@@ -67,6 +67,8 @@ transition:0.5s all ease-in-out;
     margin: 8px 0 4px;
         border: 1px solid ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(225, 112, 85)'};
     transition:0.5s all ease-in-out;
+        display: ${p => p.isSidebarOpen && p.selected && p.isOpen ? 'none' : 'block'};
+
 
   }
 `;
@@ -76,7 +78,7 @@ export const Text = styled.p`
   ${p => p.isSidebarOpen ?
     'opacity:1' : 'opacity:0'
   };
-  transition:0.7s all ease-in-out;
+  transition:0.1s  ease-in-out;
 
 `
 
