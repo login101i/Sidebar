@@ -22,7 +22,15 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
             subMenusCopy[index]['isOpen'] = !subMenusStates[index]['isOpen']
             setSubmenus(subMenusCopy)
         }
+        else {
+            // objects używają for in loop !!!!!!
+            for (let item in subMenusStates) {
+                subMenusCopy[item]['isOpen'] = false;
+                subMenusCopy[item]['selected'] = null
+            }
+            setSubmenus(subMenusCopy)
 
+        }
     }
 
     // Update of header state
@@ -66,6 +74,8 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
 
         subMenusCopy[menuItemIdx]['selected'] = subMenuItemIdx;
         setSubmenus(subMenusCopy);
+
+
     }
 
 
