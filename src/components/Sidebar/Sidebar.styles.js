@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const SidebarContainer = styled.div`
-  width: ${p => p.isSidebarOpen ? '27%' :'5%'};
+  width: ${p => p.isSidebarOpen ? '27%' : '5%'};
   background: yellow;
     max-width: 280px;
   min-width: 100px;
@@ -15,7 +15,7 @@ export const SidebarContainer = styled.div`
   background-position: top bottom;
   color:white;
   position:relative;
-  transition:0.3s;
+  transition:0.2s;
 `
 
 export const SideBarHeader = styled.div`
@@ -30,15 +30,22 @@ padding: 20px 0;
 export const MenuItemContainer = styled.div``;
 
 export const MenuItem = styled.div`
+${p => !p.isSidebarOpen && `
+text-align:center;
+${p.selected && 'background-color:rgba(0,0,0,0.5)'};
+`}
   padding: 6px 20px;
   font-weight: 600;
   color: rgba(19, 15, 64);
-  ${p => p.font};
-    color: ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(19, 15, 64)'} ;  
+  font-family:  ${p => p.font};
+    color: ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(19, 15, 64)'} ;
+ white-space:nowrap;
+  
 
       &:hover {
     color: rgba(255, 255, 255);
     transition: .1s ease-in all;
+
   }
 
    ${p => !p.selected && `
@@ -61,13 +68,23 @@ export const MenuItem = styled.div`
 `;
 
 export const Text = styled.p`
-  display: inline
+  display: ${p => p.isSidebarOpen ? 'inline' : 'none'};
+  ${p => p.isSidebarOpen ?
+    'opacity:1' : 'opacity:0'
+  };
+  transition:0.7s all ease-in-out;
+
 `
 
 export const Icon = styled.img`
   height: 16px;
   width: 16px;
   padding-right: 20px;
+  transition:.2s ease-in-out;
+    ${p => !p.isSidebarOpen && `
+  padding-right:0px;
+    `
+  }
 `
 
 // Toggler -----------------------------------------------------------------------------

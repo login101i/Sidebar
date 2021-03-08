@@ -16,7 +16,7 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
     useEffect(() => {
         isSidebarOpen ? setTimeout(() => setHeader(sideBarHeader.longHeader), 200) : setHeader(sideBarHeader.shortHeader);
     }, [isSidebarOpen, sideBarHeader])
-  
+
 
 
     const menuItemsJSX = menuItems.map((item, index) => {
@@ -27,9 +27,14 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                 font={fonts.header}
                 selected={isItemSelected}
                 onClick={() => handleMenuItemClick(item.name)}
+                isSidebarOpen={isSidebarOpen}
             >
-                <s.Icon src={item.icon} />
-                <s.Text>{item.name}</s.Text>
+                <s.Icon src={item.icon} 
+                    isSidebarOpen={isSidebarOpen}
+                />
+                <s.Text
+                isSidebarOpen={isSidebarOpen}
+                >{item.name}</s.Text>
             </s.MenuItem>
         )
     })
