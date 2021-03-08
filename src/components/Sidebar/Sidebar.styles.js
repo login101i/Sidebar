@@ -41,6 +41,7 @@ ${p.selected && 'background-color:rgba(0,0,0,0.5)'};
     color: ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(19, 15, 64)'} ;
  white-space:nowrap;
 position:relative;
+transition:0.5s all ease-in-out;
 
   
 
@@ -65,6 +66,7 @@ position:relative;
     display: block;
     margin: 8px 0 4px;
         border: 1px solid ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(225, 112, 85)'};
+    transition:0.5s all ease-in-out;
 
   }
 `;

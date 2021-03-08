@@ -6,6 +6,7 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
     const [selected, setSelectedMenuItem] = useState(menuItems[0].name);
     const [isSidebarOpen, setSidebarState] = useState(true);
     const [header, setHeader] = useState(sideBarHeader.longHeader);
+    const [subMenusStates, setSubmenus] = useState({})
 
     const handleMenuItemClick = name => {
         setSelectedMenuItem(name)
@@ -28,7 +29,24 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
         return () => window.removeEventListener('resize', updateWindowWidth);
     }, []);
 
+    // Add index of items that contain sub menu items
+    useEffect(() => {
+        const newSubmenus = {};
 
+        menuItems.forEach((item, index) => {
+            const hasSubmenus = !!item.subMenuItems.length;
+
+            if (hasSubmenus) {
+                newSubmenus[index] = {};
+                newSubmenus[index]['isOpen'] = false;
+                newSubmenus[index]['selected'] = null;
+            }
+        })
+
+        setSubmenus(newSubmenus);
+    }, [menuItems]);
+
+    console.log(subMenusStates)
 
     const menuItemsJSX = menuItems.map((item, index) => {
         const isItemSelected = selected === item.name;
