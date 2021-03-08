@@ -2,6 +2,8 @@ import React from 'react'
 import * as s from './App.styles'
 import Sidebar from './components/Sidebar/Sidebar';
 import MainView from './components/MainView/MainView'
+import * as Palette from './colors'
+
 
 const backgroundImage = 'images/mountains.jpg';
 const sideBarHeader =
@@ -36,7 +38,6 @@ const fonts = {
   menu: 'Poppins'
 }
 
-
 function App() {
   return (
 
@@ -47,6 +48,8 @@ function App() {
         shortHeader={shortHeader}
         menuItems={menuItems}
         fonts={fonts}
+        colorPalette={Palette.pinkAndBlue}
+
       />
       <MainView />
     </s.App>

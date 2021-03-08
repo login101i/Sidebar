@@ -5,7 +5,14 @@ import { Link } from 'react-router-dom';
 
 
 
-const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', shortHeader: '' }, menuItems = [], fonts = { header: '', menu: '' } }) => {
+const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', shortHeader: '' }, menuItems = [], fonts = { header: '', menu: '' }, colorPalette = {
+    bgColor1: 'rgba(11, 171, 100, 0.8)',
+    bgColor2: 'rgba(59, 183, 143, 0.8)',
+    fontColor: 'rgba(22, 46, 39)',
+    fontColorSelected: 'rgba(255, 255, 255)',
+    dividerColor: 'rgba(122, 204, 178)',
+    selectedBackgroundCollapsedMode: 'dark'
+} }) => {
 
     const [selected, setSelectedMenuItem] = useState(menuItems[0].name);
     const [isSidebarOpen, setSidebarState] = useState(true);
@@ -97,6 +104,8 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                     <s.SubMenuItem
                         onClick={() => handleSubMenuItemClick(index, subMenuItemIndex)}
                         selected={isSubmenuItemSelected}
+                        colorPalette={colorPalette}
+
                     >{subMenuItem.name}</s.SubMenuItem>
                 </Link>
             )
@@ -112,6 +121,8 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                         onClick={() => handleMenuItemClick(item.name, index)}
                         isSidebarOpen={isSidebarOpen}
                         isOpen={isOpen}
+                        colorPalette={colorPalette}
+
 
                     >
 
@@ -126,6 +137,8 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                         {hasSubmenus && (
                             <s.DropdownIcon
                                 isOpen={isOpen}
+                                colorPalette={colorPalette}
+
                             />
                         )}
                     </s.MenuItem>
@@ -138,7 +151,9 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                                 exit={{ opacity: 0, x: -30 }}
                             >
                                 <s.SubMenuItemContainer
-                                    isSidebarOpen={isSidebarOpen}>{subMenusJSX}</s.SubMenuItemContainer>
+                                    isSidebarOpen={isSidebarOpen}
+                                    colorPalette={colorPalette}
+                                >{subMenusJSX}</s.SubMenuItemContainer>
                             </motion.nav>
                         )}
                     </AnimatePresence>
@@ -152,9 +167,11 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
         <s.SidebarContainer
             backgroundImage={backgroundImage}
             isSidebarOpen={isSidebarOpen}
+            colorPalette={colorPalette}
         >
             <s.SideBarHeader font={fonts.menu} >{header}</s.SideBarHeader>
-            <s.MenuItemContainer>{menuItemsJSX}</s.MenuItemContainer>
+            <s.MenuItemContainer
+            >{menuItemsJSX}</s.MenuItemContainer>
             <s.TogglerContainer
                 onClick={() => setSidebarState(!isSidebarOpen)}
             ><s.Toggler /></s.TogglerContainer>

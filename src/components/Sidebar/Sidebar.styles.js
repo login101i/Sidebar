@@ -7,13 +7,13 @@ export const SidebarContainer = styled.div`
   min-width: 100px;
    background-image: linear-gradient(
     315deg,
-    rgba(252, 82, 150, 0.8) 0%,
-    rgba(246, 112, 98, 0.8) 74%),
+    ${p => p.colorPalette.bgColor1} 0%,
+    ${p => p.colorPalette.bgColor2} 74%),
     url(${props => props.backgroundImage});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top bottom;
-  color:white;
+  color: ${p => p.colorPalette.fontColorSelected};
   position:relative;
   transition:0.2s;
 `
@@ -32,13 +32,12 @@ export const MenuItemContainer = styled.div``;
 export const MenuItem = styled.div`
 ${p => !p.isSidebarOpen && `
 text-align:center;
-${p.selected && 'background-color:rgba(0,0,0,0.5)'};
-`}
+   ${p.selected && `background-color: ${p.colorPalette.selectedBackgroundCollapsedMode === 'dark' ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.6)'}`};
+  `};
   padding: 6px 20px;
   font-weight: 600;
-  color: rgba(19, 15, 64);
   font-family:  ${p => p.font};
-    color: ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(19, 15, 64)'} ;
+  color: ${p => p.selected ? p.colorPalette.fontColorSelected : p.colorPalette.fontColor} ;
  white-space:nowrap;
 position:relative;
 transition:0.5s all ease-in-out;
@@ -46,7 +45,7 @@ transition:0.5s all ease-in-out;
   
 
       &:hover {
-    color: rgba(255, 255, 255);
+    color: ${p => p.colorPalette.fontColorSelected};
     transition: 0.1s ease-in all;
 
   }
@@ -54,7 +53,7 @@ transition:0.5s all ease-in-out;
    ${p => !p.selected && `
     &:hover {
       &:after {
-        border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid ${p => p.selected ? p.colorPalette.fontColorSelected : p.colorPalette.dividerColor};
         transition: .1s ease-in all;
       }
     }
@@ -65,7 +64,7 @@ transition:0.5s all ease-in-out;
     content: '';
     display: block;
     margin: 8px 0 4px;
-        border: 1px solid ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(225, 112, 85)'};
+       border: 1px solid ${p => p.selected ? p.colorPalette.fontColorSelected : p.colorPalette.dividerColor};
     transition:0.5s all ease-in-out;
         display: ${p => p.isSidebarOpen && p.selected && p.isOpen ? 'none' : 'block'};
 
@@ -127,12 +126,13 @@ export const DropdownIcon = styled.span`
   position: absolute;
   top: ${p => p.isOpen ? '16px' : '12px'};
   right: 24px;
-  border: solid blue;
+  border: solid ${p => p.selected ? p.colorPalette.fontColorSelected : p.colorPalette.fontColor};
   border-width: 0 2px 2px 0;
   padding: 3px;
   transform: rotate(45deg);
    transform: ${p => p.isOpen ? 'rotate(-135deg)' : 'rotate(45deg)'};
-   transition:0.4s all ease-in-out
+   transition:0.4s all ease-in-out;
+   
 `;
 
 
@@ -147,7 +147,7 @@ export const SubMenuItemContainer = styled.div`
 
 
 export const SubMenuItem = styled.p`
-  color: ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(19, 15, 64)'};
+    color: ${p => p.selected ? p.colorPalette.fontColorSelected : p.colorPalette.fontColor};
   ${p => p.selected && 'font-weight: bold; letter-spacing: 2px;'};
   transition: .2s;  &:hover {
   color: rgba(255, 255, 255)
