@@ -31,7 +31,17 @@ export const MenuItem = styled.div`
   padding: 6px 20px;
   font-weight: 600;
   color: rgba(19, 15, 64);
-  ${p =>p.font}
+  ${p => p.font};
+    color: ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(19, 15, 64)'} ;  
+
+  
+    &:after {
+    content: '';
+    display: block;
+    margin: 8px 0 4px;
+        border: 1px solid ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(225, 112, 85)'};
+
+  }
 `;
 
 export const Text = styled.p`
