@@ -128,3 +128,20 @@ export const DropdownIcon = styled.span`
   transform: rotate(45deg);
 `;
 
+
+export const ItemContainer = styled.div`
+
+`
+export const SubMenuItemContainer = styled.div`
+  font-size: 14px;
+  ${p => p.isSidebarOpen && 'padding-left: 18%'};  
+  ${p => !p.isSidebarOpen && 'text-align: center'};
+`;
+
+
+export const SubMenuItem = styled.p`
+  color: rgba(19, 15, 64);
+  &:hover {
+  color: rgba(255, 255, 255)
+  }
+`;
