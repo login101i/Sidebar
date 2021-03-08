@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'react-router-dom';
 
 
+
 const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', shortHeader: '' }, menuItems = [], fonts = { header: '', menu: '' } }) => {
 
     const [selected, setSelectedMenuItem] = useState(menuItems[0].name);
@@ -60,6 +61,14 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
 
     console.log(subMenusStates)
 
+    const handleSubMenuItemClick = (menuItemIdx, subMenuItemIdx) => {
+        const subMenusCopy = JSON.parse(JSON.stringify(subMenusStates));
+
+        subMenusCopy[menuItemIdx]['selected'] = subMenuItemIdx;
+        setSubmenus(subMenusCopy);
+    }
+
+
     const menuItemsJSX = menuItems.map((item, index) => {
         const isItemSelected = selected === item.name;
         const hasSubmenus = !!item.subMenuItems.length;
@@ -67,8 +76,19 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
 
 
         const subMenusJSX = item.subMenuItems.map((subMenuItem, subMenuItemIndex) => {
+            const isSubmenuItemSelected = subMenusStates[index]?.selected === subMenuItemIndex;
+
             return (
-                <s.SubMenuItem key={subMenuItemIndex}>{subMenuItem.name}</s.SubMenuItem>
+                <Link
+                    to={`${item.to}${subMenuItem.to}`}
+                    style={{ textDecoration: 'none' }}
+                    key={subMenuItemIndex}>
+
+                    <s.SubMenuItem
+                        onClick={() => handleSubMenuItemClick(index, subMenuItemIndex)}
+                        selected={isSubmenuItemSelected}
+                    >{subMenuItem.name}</s.SubMenuItem>
+                </Link>
             )
         })
 
@@ -84,10 +104,12 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                         isOpen={isOpen}
 
                     >
-                        <s.Icon src={item.icon}
-                            isSidebarOpen={isSidebarOpen}
 
+                        <s.Icon
+                            src={item.icon}
+                            isSidebarOpen={isSidebarOpen}
                         />
+
                         <s.Text
                             isSidebarOpen={isSidebarOpen}
                         >{item.name}</s.Text>
