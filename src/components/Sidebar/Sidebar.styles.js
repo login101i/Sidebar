@@ -40,6 +40,8 @@ ${p.selected && 'background-color:rgba(0,0,0,0.5)'};
   font-family:  ${p => p.font};
     color: ${p => p.selected ? 'rgba(255, 255, 255)' : 'rgba(19, 15, 64)'} ;
  white-space:nowrap;
+position:relative;
+
   
 
       &:hover {
@@ -115,3 +117,14 @@ export const Toggler = styled.div`
         0 1.5em 0 0 #fff;        
     }
     `
+// Dropdown icon ----------------------------------------------------------------------
+export const DropdownIcon = styled.span`
+  position: absolute;
+  top: 8px;
+  right: 24px;
+  border: solid blue;
+  border-width: 0 2px 2px 0;
+  padding: 3px;
+  transform: rotate(45deg);
+`;
+

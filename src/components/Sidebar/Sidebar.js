@@ -20,7 +20,7 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
     // Update of sidebar state
     useEffect(() => {
         const updateWindowWidth = () => {
-            if (window.innerWidth < 1280 ) setSidebarState(false);
+            if (window.innerWidth < 1280) setSidebarState(false);
             else setSidebarState(true)
         }
         window.addEventListener('resize', updateWindowWidth);
@@ -29,8 +29,11 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
     }, []);
 
 
+
     const menuItemsJSX = menuItems.map((item, index) => {
         const isItemSelected = selected === item.name;
+        const hasSubmenus = !!item.subMenuItems.length;
+
         return (
             <s.MenuItem
                 key={index}
@@ -45,6 +48,9 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                 <s.Text
                     isSidebarOpen={isSidebarOpen}
                 >{item.name}</s.Text>
+                {hasSubmenus && (
+                    <s.DropdownIcon />
+                )}
             </s.MenuItem>
         )
     })
