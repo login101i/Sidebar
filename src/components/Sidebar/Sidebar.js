@@ -91,8 +91,11 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                         />
                     )}
                 </s.MenuItem>
-                <s.SubMenuItemContainer
-                    isSidebarOpen={isSidebarOpen}>{subMenusJSX}</s.SubMenuItemContainer>
+                {hasSubmenus && isOpen && (
+                    <s.SubMenuItemContainer
+                        isSidebarOpen={isSidebarOpen}>{subMenusJSX}</s.SubMenuItemContainer>
+                )}
+
             </s.ItemContainer>
         )
     })
