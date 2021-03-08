@@ -8,8 +8,17 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
     const [header, setHeader] = useState(sideBarHeader.longHeader);
     const [subMenusStates, setSubmenus] = useState({})
 
-    const handleMenuItemClick = name => {
+    const handleMenuItemClick = (name, index) => {
+        console.log(index)
         setSelectedMenuItem(name)
+        // poniższy obiekt nie ma referencji do  submenusStates i dobrze
+        const subMenusCopy = JSON.parse(JSON.stringify(subMenusStates));
+
+        if (subMenusStates.hasOwnProperty(index)) {
+            subMenusCopy[index]['isOpen'] = !subMenusStates[index]['isOpen']
+            setSubmenus(subMenusCopy)
+        }
+
     }
 
     // Update of header state
@@ -64,7 +73,7 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                 <s.MenuItem
                     font={fonts.header}
                     selected={isItemSelected}
-                    onClick={() => handleMenuItemClick(item.name)}
+                    onClick={() => handleMenuItemClick(item.name, index)}
                     isSidebarOpen={isSidebarOpen}
                 >
                     <s.Icon src={item.icon}
@@ -78,7 +87,7 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                     )}
                 </s.MenuItem>
                 <s.SubMenuItemContainer
-                 isSidebarOpen={isSidebarOpen}>{subMenusJSX}</s.SubMenuItemContainer>
+                    isSidebarOpen={isSidebarOpen}>{subMenusJSX}</s.SubMenuItemContainer>
             </s.ItemContainer>
         )
     })
