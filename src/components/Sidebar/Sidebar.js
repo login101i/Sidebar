@@ -7,16 +7,26 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
     const [isSidebarOpen, setSidebarState] = useState(true);
     const [header, setHeader] = useState(sideBarHeader.longHeader);
 
-
-
     const handleMenuItemClick = name => {
         setSelectedMenuItem(name)
     }
 
+    // Update of header state
     useEffect(() => {
         isSidebarOpen ? setTimeout(() => setHeader(sideBarHeader.longHeader), 200) : setHeader(sideBarHeader.shortHeader);
     }, [isSidebarOpen, sideBarHeader])
 
+
+    // Update of sidebar state
+    useEffect(() => {
+        const updateWindowWidth = () => {
+            if (window.innerWidth < 1280 ) setSidebarState(false);
+            else setSidebarState(true)
+        }
+        window.addEventListener('resize', updateWindowWidth);
+
+        return () => window.removeEventListener('resize', updateWindowWidth);
+    }, []);
 
 
     const menuItemsJSX = menuItems.map((item, index) => {
@@ -29,16 +39,15 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                 onClick={() => handleMenuItemClick(item.name)}
                 isSidebarOpen={isSidebarOpen}
             >
-                <s.Icon src={item.icon} 
+                <s.Icon src={item.icon}
                     isSidebarOpen={isSidebarOpen}
                 />
                 <s.Text
-                isSidebarOpen={isSidebarOpen}
+                    isSidebarOpen={isSidebarOpen}
                 >{item.name}</s.Text>
             </s.MenuItem>
         )
     })
-
 
     return (
         <s.SidebarContainer
