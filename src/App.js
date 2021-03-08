@@ -4,7 +4,13 @@ import Sidebar from './components/Sidebar/Sidebar';
 import MainView from './components/MainView/MainView'
 
 const backgroundImage = 'images/mountains.jpg';
-const header = "podróżuj dużo"
+const sideBarHeader =
+{
+  longHeader: "Podróżuj dużo",
+  shortHeader: "Go go"
+}
+
+const shortHeader = "Go go"
 
 const menuItems = [
   { name: 'Home', to: '/', icon: 'icons/home.svg', subMenuItems: [] },
@@ -31,16 +37,14 @@ const fonts = {
 }
 
 
-
-
-
 function App() {
   return (
 
     <s.App>
       <Sidebar
         backgroundImage={backgroundImage}
-        header={header}
+        sideBarHeader={sideBarHeader}
+        shortHeader={shortHeader}
         menuItems={menuItems}
         fonts={fonts}
       />
