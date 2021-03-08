@@ -5,13 +5,19 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
 
     const [selected, setSelectedMenuItem] = useState(menuItems[0].name);
     const [isSidebarOpen, setSidebarState] = useState(true);
+    const [header, setHeader] = useState(sideBarHeader.longHeader);
+
 
 
     const handleMenuItemClick = name => {
         setSelectedMenuItem(name)
     }
 
-    console.log(isSidebarOpen)
+    useEffect(() => {
+        isSidebarOpen ? setTimeout(() => setHeader(sideBarHeader.longHeader), 200) : setHeader(sideBarHeader.shortHeader);
+    }, [isSidebarOpen, sideBarHeader])
+  
+
 
     const menuItemsJSX = menuItems.map((item, index) => {
         const isItemSelected = selected === item.name;
@@ -34,7 +40,7 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
             backgroundImage={backgroundImage}
             isSidebarOpen={isSidebarOpen}
         >
-            <s.SideBarHeader font={fonts.menu} >{isSidebarOpen ? sideBarHeader.longHeader : sideBarHeader.shortHeader}</s.SideBarHeader>
+            <s.SideBarHeader font={fonts.menu} >{header}</s.SideBarHeader>
             <s.MenuItemContainer>{menuItemsJSX}</s.MenuItemContainer>
             <s.TogglerContainer
                 onClick={() => setSidebarState(!isSidebarOpen)}
