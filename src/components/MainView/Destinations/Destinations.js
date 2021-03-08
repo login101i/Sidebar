@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Services = () => {
+const Destinations = () => {
     return <h1>Destinations Page</h1>
 }
 
-export default Services
+export default Destinations
