@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as s from './Sidebar.styles';
 import { AnimatePresence, motion } from 'framer-motion'
+import { Link } from 'react-router-dom';
+
 
 const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', shortHeader: '' }, menuItems = [], fonts = { header: '', menu: '' } }) => {
 
@@ -72,43 +74,45 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
 
 
         return (
-            <s.ItemContainer key={index}>
-                <s.MenuItem
-                    font={fonts.header}
-                    selected={isItemSelected}
-                    onClick={() => handleMenuItemClick(item.name, index)}
-                    isSidebarOpen={isSidebarOpen}
-                    isOpen={isOpen}
-
-                >
-                    <s.Icon src={item.icon}
+            <Link to={item.to} style={{ textDecoration: 'none' }}>
+                <s.ItemContainer key={index}>
+                    <s.MenuItem
+                        font={fonts.header}
+                        selected={isItemSelected}
+                        onClick={() => handleMenuItemClick(item.name, index)}
                         isSidebarOpen={isSidebarOpen}
+                        isOpen={isOpen}
 
-                    />
-                    <s.Text
-                        isSidebarOpen={isSidebarOpen}
-                    >{item.name}</s.Text>
-                    {hasSubmenus && (
-                        <s.DropdownIcon
-                            isOpen={isOpen}
+                    >
+                        <s.Icon src={item.icon}
+                            isSidebarOpen={isSidebarOpen}
+
                         />
-                    )}
-                </s.MenuItem>
-                <AnimatePresence>
-                    {hasSubmenus && isOpen && (
-                        <motion.nav
-                            initial={{ opacity: 0, y: -15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.35 }}
-                            exit={{ opacity: 0, x: -30 }}
-                        >
-                            <s.SubMenuItemContainer
-                                isSidebarOpen={isSidebarOpen}>{subMenusJSX}</s.SubMenuItemContainer>
-                        </motion.nav>
-                    )}
-                </AnimatePresence>
+                        <s.Text
+                            isSidebarOpen={isSidebarOpen}
+                        >{item.name}</s.Text>
+                        {hasSubmenus && (
+                            <s.DropdownIcon
+                                isOpen={isOpen}
+                            />
+                        )}
+                    </s.MenuItem>
+                    <AnimatePresence>
+                        {hasSubmenus && isOpen && (
+                            <motion.nav
+                                initial={{ opacity: 0, y: -15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.35 }}
+                                exit={{ opacity: 0, x: -30 }}
+                            >
+                                <s.SubMenuItemContainer
+                                    isSidebarOpen={isSidebarOpen}>{subMenusJSX}</s.SubMenuItemContainer>
+                            </motion.nav>
+                        )}
+                    </AnimatePresence>
 
-            </s.ItemContainer>
+                </s.ItemContainer>
+            </Link>
         )
     })
 
