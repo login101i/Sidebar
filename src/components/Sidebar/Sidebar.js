@@ -60,6 +60,8 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
     const menuItemsJSX = menuItems.map((item, index) => {
         const isItemSelected = selected === item.name;
         const hasSubmenus = !!item.subMenuItems.length;
+        const isOpen = subMenusStates[index]?.isOpen;
+
 
         const subMenusJSX = item.subMenuItems.map((subMenuItem, subMenuItemIndex) => {
             return (
@@ -78,12 +80,15 @@ const Sidebar = ({ backgroundImage = '', sideBarHeader = { longHeader: '', short
                 >
                     <s.Icon src={item.icon}
                         isSidebarOpen={isSidebarOpen}
+
                     />
                     <s.Text
                         isSidebarOpen={isSidebarOpen}
                     >{item.name}</s.Text>
                     {hasSubmenus && (
-                        <s.DropdownIcon />
+                        <s.DropdownIcon
+                            isOpen={isOpen}
+                        />
                     )}
                 </s.MenuItem>
                 <s.SubMenuItemContainer

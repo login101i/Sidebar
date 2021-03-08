@@ -88,7 +88,8 @@ export const Icon = styled.img`
     ${p => !p.isSidebarOpen && `
   padding-right:0px;
     `
-  }
+  };
+ 
 `
 
 // Toggler -----------------------------------------------------------------------------
@@ -122,12 +123,14 @@ export const Toggler = styled.div`
 // Dropdown icon ----------------------------------------------------------------------
 export const DropdownIcon = styled.span`
   position: absolute;
-  top: 8px;
+  top: ${p => p.isOpen ? '16px' : '12px'};
   right: 24px;
   border: solid blue;
   border-width: 0 2px 2px 0;
   padding: 3px;
   transform: rotate(45deg);
+   transform: ${p => p.isOpen ? 'rotate(-135deg)' : 'rotate(45deg)'};
+   transition:0.4s all ease-in-out
 `;
 
 
