@@ -1,12 +1,9 @@
+
 import styled from '@emotion/styled'
 
-
-export const App = styled.div`
-background:grey;
+export const AppContainer = styled.div`
+background:purple;
 height:100vh;
-  display: flex;
-`
-
-export const Header = styled.h1`
-color:pink;
+display:flex;
+width:100%;
 `

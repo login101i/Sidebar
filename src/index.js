@@ -2,17 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './Global.scss'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-    
-      <App />
+    <Router>
+        <App />
+    </Router>
 
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+    , document.getElementById('root')
 );
 
